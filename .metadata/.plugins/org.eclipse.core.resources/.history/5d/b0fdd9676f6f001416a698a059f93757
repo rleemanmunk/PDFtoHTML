@@ -1,0 +1,48 @@
+import java.io.PrintStream;
+
+import com.pdflib.TET;
+import com.pdflib.TETException;
+
+
+public class Document {
+    static final String GLOBAL_OPTLIST = "searchpath={../resource/cmap "
+        + "../resource/glyphlist ../input}";
+    static final String BASE_DOC_OPTLIST = "";
+    static final String PAGE_OPTLIST = "granularity=word tetml={glyphdetails={all}}";
+    private static final String OUTPUT_ENCODING = System
+            .getProperty("file.encoding");
+    private static PrintStream out;
+    private static final boolean INMEMORY = false;
+    private static String outputfilename = "output.html";
+    private String docoptlist = "";
+    private TET tet;
+    private int doc;
+    private String filename;
+    
+    public Document(String filename) throws TETException {
+    	tet = new TET();
+        tet.set_option(GLOBAL_OPTLIST);
+        docoptlist = (INMEMORY ? "tetml={}"
+                : "tetml={filename={" + outputfilename + "}}")
+                + " " + BASE_DOC_OPTLIST;
+    }
+    public void openFile(String filename) throws TETException {
+    	doc = tet.open_document(filename, docoptlist);
+        if (doc == -1) {
+            System.err.println("Error " + tet.get_errnum() + " in "
+                    + tet.get_apiname() + "(): " + tet.get_errmsg());
+            tet.delete();
+            return;
+        }
+    }
+    public void startXML() {
+    	
+    }
+    public String getPageAt(int pageno) throws TETException {
+    	tet.process_page(doc, pageno, PAGE_OPTLIST);
+    	return "";
+    }
+    public void endFile() throws TETException {
+    	tet.process_page(doc, 0, "tetml={trailer}");
+    }
+}

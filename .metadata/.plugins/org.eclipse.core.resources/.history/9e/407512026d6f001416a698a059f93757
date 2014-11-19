@@ -1,0 +1,29 @@
+import java.io.PrintStream;
+
+import com.pdflib.TET;
+import com.pdflib.TETException;
+
+
+public class Document {
+    static final String GLOBAL_OPTLIST = "searchpath={../resource/cmap "
+        + "../resource/glyphlist ../input}";
+    static final String BASE_DOC_OPTLIST = "";
+    static final String PAGE_OPTLIST = "granularity=word tetml={glyphdetails={all}}";
+    private static final String OUTPUT_ENCODING = System
+            .getProperty("file.encoding");
+    private static PrintStream out;
+    private static final boolean INMEMORY = false;
+    private static outputfilename = "output.html";
+    private TET tet;
+    
+    public Document() throws TETException {
+    	tet = new TET();
+        tet.set_option(GLOBAL_OPTLIST);
+        final String docoptlist = (INMEMORY ? "tetml={}"
+                : "tetml={filename={" + outputfilename + "}}")
+                + " " + BASE_DOC_OPTLIST;
+    }
+    public void openFile(String filename) {
+    	
+    }
+}

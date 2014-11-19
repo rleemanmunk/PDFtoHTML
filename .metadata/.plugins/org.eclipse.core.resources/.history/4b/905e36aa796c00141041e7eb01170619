@@ -1,0 +1,9 @@
+import com.pdflib.TET;
+import com.pdflib.TETException;
+import com.pdflib.TET.*;
+
+public class Basic {
+    public static void main(String argv[]) throws TETException {
+       TET t = new TET();
+    }
+}

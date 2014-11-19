@@ -1,0 +1,17 @@
+import java.io.PrintStream;
+
+
+public class Document {
+    static final String GLOBAL_OPTLIST = "searchpath={../resource/cmap "
+        + "../resource/glyphlist ../input}";
+    static final String BASE_DOC_OPTLIST = "";
+    static final String PAGE_OPTLIST = "granularity=word tetml={glyphdetails={all}}";
+    private static final String OUTPUT_ENCODING = System
+            .getProperty("file.encoding");
+    private static PrintStream out;
+    private static final boolean INMEMORY = false;
+    
+    public void openFile(String filename) {
+    	
+    }
+}

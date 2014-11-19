@@ -1,0 +1,29 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>HTML version of PA3.pdf</title>
+<style type="text/css">
+                                .dropcap { float:left; font-size:88px; line-height:88px; padding-top:3px; padding-right:3px; }
+                                
+                                .shadowed { text-shadow: 2px 2px 3px #000; }
+                        </style>
+</head>
+<body>
+<p>COSI 134a ( Fall 2014 ) Programming Assignment # 3 : Hidden Markov Models </p>
+<p>Assignment </p>
+<p>Due : November 19 2014 , 23:55 EDT </p>
+<p>Implement likelihood ( forward ), decoding ( Viterbi ), and supervised learning ( maximum likelihood estimation ) algorithms for Hidden Markov Models . Apply them to determine part-of-speech tags . Report on your implementation ( design decisions , representations , difficulties ) and its performance . </p>
+<p>Distribution </p>
+<p>The file pa3-dist1 . tgz contains starter code based on the code distributed for pa1 . As before , you may use what you like and ignore the rest . If you find that modifications are necessary to anything outside of the test _ hmm module , please document your changes . If you &rsquo; re confused by anything , please ask . If you find bugs , please report them as soon as possible . </p>
+<p>Basic Tests </p>
+<p>Before tackling the part-of-speech task , verify that your algorithms are functioning correctly by reproducing the ( corrected &mdash; see the comment in IceCreamHMM . test _ likelihood ) probabilities and variable values for the Eisner ice cream example in chapter 6 of Jurafsky &amp; Martin . You may use the distributed test case as a starting point , but will probably need to tweak it to conform to your hmm implementation &rsquo; s interface . The decoding test does not check for specific values of the Viterbi trellis ; you are responsible for adding such a test or checking the values manually . </p>
+<p>Tagging </p>
+<p>Once your hmm implementation is working , you can apply it to a somewhat more challenging task : supervised learning of part-of-speech ( pos ) tags . By default , you will use tagged sentences from the Penn Treebank ( via the nltk ), but any similar corpus ( e . g ., Brown ) should work about equally well . You will need to add ( at least ) smoothing and unknown-word handling to your hmm implementation in order to complete this task ; be sure to document your strategies for both in your report . </p>
+<p>There are a range of parameters to experiment with in the supplied pos test case : you can collapse the tag-set space ( e . g ., by taking first letters only ), use different canonicalization strategies for the words ( e . g ., none , case folding , lemmatization ), and adjust the size of the corpus and the train / test split . Play with a few variations and note the results in your report . </p>
+<p>Extra Credit </p>
+<p>You may also choose to implement unsupervised learning using the forward-backward algorithm ( i . e ., Baum-Welch ). Start with learning parameters for the Eisner ice cream model first , then move on to pos tags . Document your results . This is not a required part of the assignment . </p>
+<p>Grading </p>
+<p>Your grade will be based on the correctness of your hmm algorithm implementation ( 60 %), its performance on the pos tagging task ( 10 %), code clarity and style ( 20 %), and the quality of your report ( 10 %). Successful unsupervised learning is worth an additional 10 %. </p>
+<p>1 </p>
+</body>
+</html>

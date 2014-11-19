@@ -1,0 +1,22 @@
+import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+
+
+public class XMLtoHTML {
+	public static void getHTML() {
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+
+	    Transformer transformer =
+	      tFactory.newTransformer
+	         (new javax.xml.transform.stream.StreamSource
+	            ("tetml2html.xsl"));
+	    transformer.transform
+	      (new javax.xml.transform.stream.StreamSource
+	            (new ByteArrayInputStream(tetml)),
+	       new javax.xml.transform.stream.StreamResult
+	            (new FileOutputStream("output.html")));
+	}
+}

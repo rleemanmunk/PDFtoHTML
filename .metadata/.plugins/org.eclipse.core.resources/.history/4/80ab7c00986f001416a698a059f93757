@@ -1,0 +1,25 @@
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.xml.transform.dom.DOMSource; 
+import javax.xml.transform.stream.StreamSource; 
+import javax.xml.transform.stream.StreamResult; 
+
+import com.pdflib.TETException;
+
+
+public class DocumentTest {
+
+	public static void main(String[] args) throws TETException, SAXException, IOException {
+		Document doc = new Document("PA3.pdf");
+		doc.startXML();
+		doc.getPageAt(1);
+		doc.endXML();
+		byte[] tetml = doc.getXML();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+        document = builder.parse(new ByteArrayInputStream(tetml));
+	}
+}

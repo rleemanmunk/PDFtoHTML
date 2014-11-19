@@ -1,0 +1,38 @@
+import java.io.FileNotFoundException;
+
+import javax.xml.transform.TransformerException;
+
+import com.pdflib.TETException;
+
+
+public class PDFtoHTML {
+	private PDFtoXML doc=null;
+	private int page_no = 0;
+
+	public void openFile(String filename) throws TETException {
+		doc = new PDFtoXML("Ex1.1-10.pdf");
+		page_no = 0;
+	}
+	public String getNextPage() throws TETException, FileNotFoundException, TransformerException {
+		doc.startXML();
+		doc.getPage(page_no);
+		doc.endXML();
+		byte[] tetml = doc.getXML();
+		XMLtoHTML translator = new XMLtoHTML();
+		return translator.getHTML(tetml);
+	}
+	
+	public String getDocument() throws TETException, FileNotFoundException, TransformerException {
+		doc.startXML();
+		doc.getAllPages();
+		doc.endXML();
+		byte[] tetml = doc.getXML();
+		XMLtoHTML translator = new XMLtoHTML();
+		return translator.getHTML(tetml);
+	}
+	
+	public static void main(String[] args) {
+
+	}
+
+}

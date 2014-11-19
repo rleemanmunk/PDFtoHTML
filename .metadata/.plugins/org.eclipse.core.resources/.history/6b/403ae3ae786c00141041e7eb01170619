@@ -1,0 +1,30 @@
+/* $Id: starter_basic.java,v 1.15 2014/05/08 14:20:30 rp Exp $
+ *
+ * Basic starter:
+ * Create some simple text, vector graphics and image output
+ *
+ * required software: PDFlib/PDFlib+PDI/PPS 9
+ * required data: image data
+ */
+
+import com.pdflib.pdflib;
+import com.pdflib.PDFlibException;
+
+public class Basic {
+    public static void main(String argv[]) {
+        /* This is where the data files are. Adjust as necessary. */
+        String searchpath = "../input";
+        String outfile = "starter_basic.pdf";
+        String title = "Starter Basic";
+
+        pdflib p = null;
+        String imagefile = "nesrin.jpg";
+        String optlist;
+        int image;
+        int exitcode = 0;
+
+        try {
+            p = new pdflib();
+        }
+    }
+}

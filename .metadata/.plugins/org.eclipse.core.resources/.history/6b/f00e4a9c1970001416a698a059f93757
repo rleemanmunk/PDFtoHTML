@@ -1,0 +1,69 @@
+import java.io.PrintStream;
+
+import com.pdflib.TET;
+import com.pdflib.TETException;
+
+
+public class Document {
+    static final String GLOBAL_OPTLIST = "searchpath={../resource/cmap "
+        + "../resource/glyphlist ../input}";
+    static final String BASE_DOC_OPTLIST = "";
+    static final String PAGE_OPTLIST = "granularity=word tetml={glyphdetails={all}}";
+    private static final String OUTPUT_ENCODING = System
+            .getProperty("file.encoding");
+    private static PrintStream out;
+    private static final boolean INMEMORY = false;
+    private static String outputfilename = "output.html";
+    private String docoptlist = "";
+    private TET tet;
+    private int doc;
+    private String filename;
+    
+    public Document(String filename) throws TETException {
+    	tet = new TET();
+        tet.set_option(GLOBAL_OPTLIST);
+        /*docoptlist = (INMEMORY ? "tetml={}"
+                : "tetml={filename={" + outputfilename + "}}")
+                + " " + BASE_DOC_OPTLIST;*/
+        docoptlist = ("tetml={} " + BASE_DOC_OPTLIST);
+        this.filename = filename;
+    }
+    public void openFile() throws TETException {
+    	doc = tet.open_document(filename, docoptlist);
+        if (doc == -1) {
+            System.err.println("Error " + tet.get_errnum() + " in "
+                    + tet.get_apiname() + "(): " + tet.get_errmsg());
+            tet.delete();
+            return;
+        }
+    }
+    public int getNumPages() {
+    	
+    }
+    public void startXML() throws TETException {
+    	openFile();
+    }
+    public void getPageAt(int pageno) throws TETException {
+    	tet.process_page(doc, pageno, PAGE_OPTLIST);
+    	return;
+    }
+    public void getAllPages() throws TETException {
+    	int n_pages = doc.getNumPages();
+    	final int n_pages = (int) tet.pcos_get_number(doc, "length:pages");
+        for (int pageno = 0; pageno <= n_pages; ++pageno) {
+            tet.process_page(doc, pageno, PAGE_OPTLIST);
+        }
+        return;
+    }
+    public void endXML() throws TETException {
+    	tet.process_page(doc, 0, "tetml={trailer}");
+    }
+    public byte[] getXML() throws TETException {
+    	final byte[] tetml = tet.get_xml_data(doc, "");
+        if (tetml == null) {
+            System.err.println("tetml: couldn't retrieve XML data");
+            return null;
+        }
+        return tetml;
+    }
+}

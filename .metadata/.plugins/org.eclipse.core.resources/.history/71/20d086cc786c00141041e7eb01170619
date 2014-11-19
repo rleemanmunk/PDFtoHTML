@@ -1,0 +1,7 @@
+import com.pdflib.TET.*;
+
+public class Basic {
+    public static void main(String argv[]) throws PDFlibException {
+       
+    }
+}

@@ -1,0 +1,39 @@
+import java.io.PrintStream;
+
+
+public class Document {
+	  /**
+     * Global option list.
+     */
+    static final String GLOBAL_OPTLIST = "searchpath={../resource/cmap "
+        + "../resource/glyphlist ../input}";
+
+    /**
+     * Document specific option list.
+     */
+    static final String BASE_DOC_OPTLIST = "";
+
+    /**
+     * Page-specific option list.
+     */
+    static final String PAGE_OPTLIST = "granularity=word tetml={glyphdetails={all}}";
+
+    /**
+     * The encoding in which the output is sent to System.out. For running the
+     * example in a Windows command window, you can set this for example to
+     * "windows-1252" for getting Latin-1 output.
+     */
+    private static final String OUTPUT_ENCODING = System
+            .getProperty("file.encoding");
+
+    /**
+     * For printing to System.out in the encoding specified via OUTPUT_ENCODING.
+     */
+    private static PrintStream out;
+    
+    /**
+     * Set to true for in-memory processing.
+     */
+    private static final boolean INMEMORY = false;
+    
+}
