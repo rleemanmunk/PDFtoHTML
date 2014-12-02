@@ -1,0 +1,39 @@
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.LinkedList;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+
+
+public class XMLtoHTML {
+	public String getHTML(byte[] tetml) throws FileNotFoundException, TransformerException {
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+	    Transformer transformer =
+	      tFactory.newTransformer
+	         (new javax.xml.transform.stream.StreamSource
+	            ("tetml2html.xsl"));
+	    transformer.transform
+	      (new javax.xml.transform.stream.StreamSource
+	            (new ByteArrayInputStream(tetml)),
+	       new javax.xml.transform.stream.StreamResult
+	            (output));
+	    return cleanHTML(output.toString());
+	}
+	public String cleanHTML(String content) {
+		LinkedList<String> forward_punc = new LinkedList<String>(Arrays.asList("\\.",",","!","'","\\)","\\]"));
+		LinkedList<String> backward_punc = new LinkedList<String>(Arrays.asList("'","\\(","\\["));
+		for(String p : forward_punc) {
+			content = content.replaceAll("\\s" + p, p);
+		}
+		for(String p : backward_punc) {
+			content = content.replaceAll(p + "\\s", p);
+		}
+		content = content.replaceAll("</p><p>", " ");
+		return content;
+	}
+}

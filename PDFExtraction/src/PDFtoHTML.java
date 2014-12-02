@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.transform.TransformerException;
 
@@ -38,10 +40,13 @@ public class PDFtoHTML {
 		return translator.getHTML(tetml);
 	}
 	
-	public static void main(String[] args) throws TETException, FileNotFoundException, TransformerException {
+	public static void main(String[] args) throws TETException, FileNotFoundException, TransformerException, UnsupportedEncodingException {
 		PDFtoHTML reader = new PDFtoHTML();
 		reader.openFile("Ex1.1-10.pdf");
-		System.out.println(reader.getDocument());
+		PrintWriter writer = new PrintWriter("output.html", "UTF-8");
+		writer.println(reader.getDocument());
+		writer.close();
+		
 	}
 
 }

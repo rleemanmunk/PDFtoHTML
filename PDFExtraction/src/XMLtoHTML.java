@@ -1,6 +1,8 @@
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -20,6 +22,17 @@ public class XMLtoHTML {
 	            (new ByteArrayInputStream(tetml)),
 	       new javax.xml.transform.stream.StreamResult
 	            (output));
-	    return output.toString();
+	    return cleanHTML(output.toString());
+	}
+	public String cleanHTML(String content) {
+		LinkedList<String> forward_punc = new LinkedList<String>(Arrays.asList("\\.",",",";","!","\'","’","\\)","\\]","\"","\\:"));
+		LinkedList<String> backward_punc = new LinkedList<String>(Arrays.asList("\'","’","\"","\\(","\\["));
+		for(String p : forward_punc) {
+			content = content.replaceAll("\\s" + p, p);
+		}
+		for(String p : backward_punc) {
+			content = content.replaceAll(p + "\\s", p);
+		}
+		return content;
 	}
 }

@@ -1,1 +1,1 @@
-{}
+[[{"location":"/usr/lib/jvm/java-7-openjdk-amd64","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.7"}},"jre:jre:1.7.0"],[{"location":"/home/rachel/Desktop/AdobeProject/TET/PDFExtraction/lib/TET.jar","type":"JAR","hints":{}},"ABSENT"],[{"location":"/home/rachel/Desktop/AdobeProject/TET/PDFExtraction","type":"PROJECT","hints":{"PROJECT_NAME":"PDFExtraction"}},"ABSENT"]]
